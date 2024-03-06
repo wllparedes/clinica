@@ -1,7 +1,12 @@
+@import url('../../node_modules/@fontsource-variable/onest/index.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 [x-cloak] {
     display: none;
+}
+
+.font-onest-variable {
+    font-family: 'Onest Variable', "Figtree" !important;
 }

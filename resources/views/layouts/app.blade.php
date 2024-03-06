@@ -21,7 +21,7 @@
         <wireui:scripts />
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-onest-variable antialiased">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
