@@ -23,7 +23,7 @@
             </div>
 
             <div class="mt-4">
-                <x-input id="password" class="block mt-1 w-full" type="password" label="{{ __('Password') }}"
+                <x-inputs.password id="password" class="block mt-1 w-full" type="password" label="{{ __('Password') }}"
                     name="password" autocomplete="current-password" />
             </div>
 

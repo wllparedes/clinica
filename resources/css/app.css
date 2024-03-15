@@ -7,6 +7,7 @@
     display: none;
 }
 
-.font-onest-variable {
+.font-onest-variable,
+.phpdebugbar {
     font-family: 'Onest Variable', "Figtree" !important;
 }

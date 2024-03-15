@@ -28,8 +28,8 @@ class UserFactory extends Factory
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
-            'current_team_id' => null,
+            // 'profile_photo_path' => null,
+            // 'current_team_id' => null,
         ];
     }
 
@@ -59,7 +59,7 @@ class UserFactory extends Factory
                 ->state(fn (array $attributes, User $user) => [
                     'name' => $user->name.'\'s Team',
                     'user_id' => $user->id,
-                    'personal_team' => true,
+                    // 'personal_team' => true,
                 ])
                 ->when(is_callable($callback), $callback),
             'ownedTeams'
