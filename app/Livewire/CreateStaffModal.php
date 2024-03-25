@@ -38,7 +38,7 @@ class CreateStaffModal extends Component
     {
         $this->createForm->save();
 
-        $this->dispatch('patientCreated');
+        $this->dispatch('staffCreated');
 
         $this->open = false;
 

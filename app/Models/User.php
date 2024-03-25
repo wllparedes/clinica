@@ -106,6 +106,12 @@ class User extends Authenticatable
         return $this->hasMany(AppointmentRequest::class, 'patient_id');
     }
 
+    public function medicalRequests()
+    {
+        return $this->hasMany(MedicalRequest::class, 'doctor_id');
+    }
+
+
     // ACCESSORS
 
     public function getFullNameAttribute()

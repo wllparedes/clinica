@@ -22,4 +22,9 @@ class AppointmentRequest extends Model
     {
         return $this->belongsTo(User::class, 'patient_id');
     }
+
+    public function medicalRequest()
+    {
+        return $this->hasOne(MedicalRequest::class, 'appointment_id');
+    }
 }

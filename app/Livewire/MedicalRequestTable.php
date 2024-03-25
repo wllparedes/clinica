@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\AppointmentRequest;
+use App\Models\MedicalRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -14,10 +14,9 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\Responsive;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class AppointmentRequestTable extends PowerGridComponent
+final class MedicalRequestTable extends PowerGridComponent
 {
     use WithExport;
 
@@ -25,17 +24,9 @@ final class AppointmentRequestTable extends PowerGridComponent
 
     public string $loadingComponent = 'components.loading';
 
-    protected $listeners = ['patientCreated' => 'refresh'];
-
-    public function refresh(): void
-    {
-        $this->resetPage();
-    }
-
     public function setUp(): array
     {
         $this->showCheckBox();
-
 
         return [
             // Exportable::make('export')
@@ -44,39 +35,25 @@ final class AppointmentRequestTable extends PowerGridComponent
             Header::make()
                 ->showToggleColumns()
                 ->showSearchInput(),
-
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
-
-            Responsive::make()
-                ->fixedColumns('dishes.name', Responsive::ACTIONS_COLUMN_NAME),
-
         ];
     }
 
     public function datasource(): Builder
     {
-
         $user = auth()->user();
 
-        if ($user->role === 'admin' || $user->role === 'super_admin' || $user->role === 'receptionist') {
-            return AppointmentRequest::query()->orderBy('id', 'desc');
-        } elseif ($user->role === 'patient') {
-            return AppointmentRequest::where('patient_id', auth()->id())
-                ->with('user')
-                ->orderBy('id', 'desc');
-        } elseif ($user->role === 'doctor') {
-            return AppointmentRequest::whereHas('medicalRequest', function ($query) use ($user) {
-                $query->where('doctor_id', $user->id);
-            })
-                ->with('user')
-                ->orderBy('id', 'desc');
+        if ($user->role == 'doctor') {
+            return MedicalRequest::where('doctor_id', $user->id);
+        } elseif ($user->role == 'patient') {
+            return MedicalRequest::whereHas('appointment', function ($query) use ($user) {
+                $query->where('patient_id', $user->id);
+            });
+        } elseif ($user->role == 'admin' || $user->role == 'super_admin') {
+            return MedicalRequest::query();
         }
-
-        // return AppointmentRequest::where('patient_id', auth()->id())
-        //     ->with('user')
-        //     ->orderBy('created_at', 'desc');
     }
 
     public function relationSearch(): array
@@ -88,20 +65,11 @@ final class AppointmentRequestTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id')
-            ->add('estimated_datetime')
-            ->add('is_urgent', function ($dish) {
-                return $dish->is_urgent ? __('Yes') : __('No');
-            })
-            ->add('comment')
-            ->add('status', function ($dish) {
-                return match ($dish->status) {
-                    'pending' => __('Pending'),
-                    'approved' => __('Approved'),
-                    'rejected' => __('Rejected'),
-                    default => __('Unknown')
-                };
-            })
-            ->add('motive')
+            ->add('appointment_id')
+            ->add('doctor_id')
+            ->add('date_formatted', fn (MedicalRequest $model) => Carbon::parse($model->date)->format('d/m/Y'))
+            ->add('time')
+            ->add('status')
             ->add('created_at');
     }
 
@@ -109,16 +77,12 @@ final class AppointmentRequestTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
+            Column::make('Appointment id', 'appointment_id'),
+            Column::make('Doctor id', 'doctor_id'),
+            Column::make('Date', 'date_formatted', 'date')
+                ->sortable(),
 
-            Column::make(__('Estimated datetime'), 'estimated_datetime')
-                ->sortable()
-                ->searchable(),
-
-            Column::make(__('Is urgent'), 'is_urgent')
-                ->sortable()
-                ->searchable(),
-
-            Column::make(__('Comment'), 'comment')
+            Column::make('Time', 'time')
                 ->sortable()
                 ->searchable(),
 
@@ -126,14 +90,12 @@ final class AppointmentRequestTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
+            Column::make('Created at', 'created_at_formatted', 'created_at')
+                ->sortable(),
 
-            Column::make(__('Motive'), 'motive')
+            Column::make('Created at', 'created_at')
                 ->sortable()
-                ->searchable(),
-
-            Column::make(__('Created at'), 'created_at')
-                ->sortable()
-                ->searchable(),
+                ->searchable()
 
             // Column::action('Action')
         ];
@@ -141,7 +103,9 @@ final class AppointmentRequestTable extends PowerGridComponent
 
     public function filters(): array
     {
-        return [];
+        return [
+            Filter::datepicker('date'),
+        ];
     }
 
     // #[\Livewire\Attributes\On('edit')]
@@ -150,7 +114,7 @@ final class AppointmentRequestTable extends PowerGridComponent
     //     $this->js('alert(' . $rowId . ')');
     // }
 
-    // public function actions(AppointmentRequest $row): array
+    // public function actions(MedicalRequest $row): array
     // {
     //     return [
     //         Button::add('edit')

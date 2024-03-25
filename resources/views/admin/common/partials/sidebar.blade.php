@@ -4,14 +4,14 @@
     <div class="h-full px-3 pb-4 overflow-y-auto dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
-                <a href="{{ route('admin.dashboard') }}"
+                <a href="{{ route('admin.dashboard') }}" wire:navigate
                     class="{{ setActive('admin.dashboard') }} flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="home" class="w-5 h-5" />
                     <span class="ms-3">Inicio</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.staff') }}"
+                <a href="{{ route('admin.staff') }}" wire:navigate
                     class="{{ setActive('admin.staff') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="users" class="w-5 h-5" />
                     <span class="flex-1 ms-3 whitespace-nowrap">Personal</span>
@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.patients') }}"
+                <a href="{{ route('admin.patients') }}" wire:navigate
                     class="{{ setActive('admin.patients') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="user" class="w-5 h-5" />
                     <span class="flex-1 ms-3 whitespace-nowrap">Pacientes</span>
@@ -29,15 +29,15 @@
                 </a>
             </li>
             <li>
-                <a href="#"
-                    class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
+                <a href="{{ route('admin.appointments') }}" wire:navigate
+                    class="{{ setActive('admin.appointments') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="annotation" class="w-5 h-5" />
-                    <span class="flex-1 ms-3 whitespace-nowrap">Consulta Citas médicas</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Solicitudes de citas</span>
                 </a>
             </li>
             <li>
-                <a href="#"
-                    class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
+                <a href="{{ route('admin.medical-requests') }}" wire:navigate
+                    class="{{ setActive('admin.medical-requests') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="calendar" class="w-5 h-5" />
                     <span class="flex-1 ms-3 whitespace-nowrap">Citas médicas</span>
                 </a>

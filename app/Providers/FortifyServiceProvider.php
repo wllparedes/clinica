@@ -59,6 +59,7 @@ class FortifyServiceProvider extends ServiceProvider
                         'admin', 'super_admin' => route('admin.dashboard'),
                         'patient' => route('patient.dashboard'),
                         'doctor' => route('doctor.dashboard'),
+                        'receptionist' => route('receptionist.dashboard'),
                         default => route('home'),
                     };
 

@@ -38,6 +38,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/patients', function () {
                 return view('admin.patients.index');
             })->name('patients');
+
+            Route::get('/appointments', function () {
+                return view('admin.appointments.index');
+            })->name('appointments');
+
+            Route::get('/medical-requests', function () {
+                return view('admin.medical-requests.index');
+            })->name('medical-requests');
         });
     });
 
@@ -48,24 +56,45 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
         Route::get('/patient/dashboard', function () {
             return view('clinic.common.home.dashboard');
-        })->name('patient.dashboard');
+        })->name('dashboard');
 
 
         Route::get('/patient/appointments', function () {
             return view('clinic.patient.appointments.index');
-        })->name('patient.appointments');
+        })->name('appointments');
     });
 
     // DOCTORS
 
     Route::middleware(['check.role:doctor'])->group(function () {
 
-        Route::get('/doctor/dashboard', function () {
-            return view('clinic.common.home.dashboard');
-        })->name('doctor.dashboard');
+        Route::group(['prefix' => 'doctor'], function () {
 
-        Route::get('/doctor/appointments', function () {
-            return view('clinic.patient.appointments.index');
-        })->name('doctor.appointments');
+            Route::get('/dashboard', function () {
+                return view('clinic.common.home.dashboard');
+            })->name('dashboard');
+
+            Route::get('/medical-requests', function () {
+                return view('clinic.doctor.medical-requests.index');
+            })->name('medical-requests');
+        });
+    });
+
+    // RECEPTIONIST
+
+    Route::middleware(['check.role:receptionist'])->group(function () {
+
+        Route::group(['prefix' => 'receptionist'], function () {
+
+            Route::get('/dashboard', function () {
+                return view('clinic.common.home.dashboard');
+            })->name('dashboard');
+
+            Route::get('/appointments', function () {
+                return view('clinic.receptionist.appointments.index');
+            })->name('appointments');
+
+        });
+
     });
 });

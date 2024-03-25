@@ -21,9 +21,9 @@ class StaffCreateForm extends Form
     #[Validate('required')]
     public $phoneNumber;
     #[Validate('required|unique:users,email')]
-    public $email;
+    public $email = '';
     #[Validate('required|min:8|max:16|different:email')]
-    public $password;
+    public $password = '';
     #[Validate('required')]
     public $role;
     public $gender = 'M';
