@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> Clinica </title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -19,7 +19,7 @@
     @livewireStyles
 
     <!-- Flowbite -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
 
     <!-- Wire UI -->
     <wireui:scripts />
@@ -31,9 +31,9 @@
 
     <div class="grid-container">
 
-        @include('partials.sidebar')
+        @include('clinic.common.partials.sidebar')
 
-        <div class="min-h-screen bg-gray-100 main-container">
+        <div class="min-h-screen bg-white main-container">
 
             @livewire('navigation-menu')
 
@@ -48,8 +48,13 @@
 
             <!-- Page Content -->
             <main>
+                <x-notifications />
+
                 {{ $slot }}
             </main>
+
+            @include('clinic.common.partials.footer')
+
         </div>
     </div>
 
@@ -58,6 +63,7 @@
     @livewireScripts
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
 </body>
 
 </html>

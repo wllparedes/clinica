@@ -101,6 +101,11 @@ class User extends Authenticatable
         return $this->file()->where('category', 'avatars')->first();
     }
 
+    public function appointmentRequests()
+    {
+        return $this->hasMany(AppointmentRequest::class, 'patient_id');
+    }
+
     // ACCESSORS
 
     public function getFullNameAttribute()

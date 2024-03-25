@@ -17,6 +17,7 @@
         "league/flysystem-ftp": "3.0",
         "league/flysystem-sftp-v3": "3.0",
         "livewire/livewire": "^3.0",
+        "power-components/livewire-powergrid": "^5.4",
         "wireui/wireui": "^1.18"
     },
     "require-dev": {

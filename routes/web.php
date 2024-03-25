@@ -17,12 +17,55 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+// LOGIN
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+
+    // ADMIN
+
+    Route::middleware(['check.role:admin,super_admin'])->group(function () {
+
+        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+            Route::get('/dashboard', function () {
+                return view('admin.common.home.dashboard');
+            })->name('dashboard');
+
+            Route::get('/staff', function () {
+                return view('admin.staff.index');
+            })->name('staff');
+
+            Route::get('/patients', function () {
+                return view('admin.patients.index');
+            })->name('patients');
+        });
+    });
+
+    // PATIENTS
+
+    Route::middleware(['check.role:patient'])->group(function () {
+
+
+        Route::get('/patient/dashboard', function () {
+            return view('clinic.common.home.dashboard');
+        })->name('patient.dashboard');
+
+
+        Route::get('/patient/appointments', function () {
+            return view('clinic.patient.appointments.index');
+        })->name('patient.appointments');
+    });
+
+    // DOCTORS
+
+    Route::middleware(['check.role:doctor'])->group(function () {
+
+        Route::get('/doctor/dashboard', function () {
+            return view('clinic.common.home.dashboard');
+        })->name('doctor.dashboard');
+
+        Route::get('/doctor/appointments', function () {
+            return view('clinic.patient.appointments.index');
+        })->name('doctor.appointments');
+    });
 });

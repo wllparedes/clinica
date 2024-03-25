@@ -11,3 +11,21 @@
 .phpdebugbar {
     font-family: 'Onest Variable', "Figtree" !important;
 }
+
+
+/* .grid-container {
+    display: grid;
+    grid-template-columns: 250px 3fr;
+    grid-template-rows: auto;
+    height: 100vh;
+}
+
+aside {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.main-container {
+    grid-column: 2;
+    grid-row: 1;
+} */
