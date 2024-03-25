@@ -98,7 +98,7 @@ final class StaffTable extends PowerGridComponent
             ->add('email')
             // ->add('available')
             ->add('role', function ($dish) {
-                return config('parameters.roles')[$dish->role];
+                return setRole($dish);
             })
             ->add('status');
     }

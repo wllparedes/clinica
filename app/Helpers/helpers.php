@@ -22,6 +22,11 @@ function setStatus($dish)
     return config('parameters.status')[$dish->status];
 }
 
+function setRole($dish)
+{
+    return config('parameters.roles')[$dish->role];
+}
+
 
 
 // CARBON
