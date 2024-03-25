@@ -51,8 +51,8 @@ final class MedicalRequestTable extends PowerGridComponent
             return MedicalRequest::whereHas('appointment', function ($query) use ($user) {
                 $query->where('patient_id', $user->id);
             });
-        } elseif ($user->role == 'admin' || $user->role == 'super_admin') {
-            return MedicalRequest::query();
+        } elseif ($user->role == 'admin' || $user->role == 'super_admin' || $user->role == 'receptionist') {
+            return MedicalRequest::with('doctor');
         }
     }
 
@@ -66,10 +66,14 @@ final class MedicalRequestTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('appointment_id')
-            ->add('doctor_id')
+            ->add('doctor_names', function ($dish) {
+                return $dish->doctor->full_name;
+            })
             ->add('date_formatted', fn (MedicalRequest $model) => Carbon::parse($model->date)->format('d/m/Y'))
             ->add('time')
-            ->add('status')
+            ->add('status', function ($dish) {
+                return setStatus($dish);
+            })
             ->add('created_at');
     }
 
@@ -78,11 +82,11 @@ final class MedicalRequestTable extends PowerGridComponent
         return [
             Column::make('Id', 'id'),
             Column::make('Appointment id', 'appointment_id'),
-            Column::make('Doctor id', 'doctor_id'),
+            Column::make('Doctor', 'doctor_names'),
             Column::make('Date', 'date_formatted', 'date')
                 ->sortable(),
 
-            Column::make('Time', 'time')
+            Column::make(__('Time'), 'time')
                 ->sortable()
                 ->searchable(),
 

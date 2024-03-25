@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Appointment\AppointmentController;
+use App\Http\Controllers\MedicalRequest\MedicalRequestController;
+use App\Http\Controllers\Receptionist\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,52 +53,22 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         });
     });
 
-    // PATIENTS
+    // CLINIC
 
-    Route::middleware(['check.role:patient'])->group(function () {
+    Route::group(['prefix' => 'clinic', 'as' => 'clinic.'], function () {
 
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('/patient/dashboard', function () {
-            return view('clinic.common.home.dashboard');
-        })->name('dashboard');
-
-
-        Route::get('/patient/appointments', function () {
-            return view('clinic.patient.appointments.index');
-        })->name('appointments');
-    });
-
-    // DOCTORS
-
-    Route::middleware(['check.role:doctor'])->group(function () {
-
-        Route::group(['prefix' => 'doctor'], function () {
-
-            Route::get('/dashboard', function () {
-                return view('clinic.common.home.dashboard');
-            })->name('dashboard');
-
-            Route::get('/medical-requests', function () {
-                return view('clinic.doctor.medical-requests.index');
-            })->name('medical-requests');
-        });
-    });
-
-    // RECEPTIONIST
-
-    Route::middleware(['check.role:receptionist'])->group(function () {
-
-        Route::group(['prefix' => 'receptionist'], function () {
-
-            Route::get('/dashboard', function () {
-                return view('clinic.common.home.dashboard');
-            })->name('dashboard');
-
-            Route::get('/appointments', function () {
-                return view('clinic.receptionist.appointments.index');
-            })->name('appointments');
-
+        Route::middleware(['check.role:patient,receptionist'])->group(function () {
+            Route::controller(AppointmentController::class)->group(function () {
+                Route::get('/appointments', 'index')->name('appointments');
+                Route::get('/appointments-all', 'getAppointments')->name('appointment.all');
+                Route::get('/doctors-all', 'getDoctors')->name('doctor.all');
+            });
         });
 
+        Route::middleware(['check.role:doctor,patient,receptionist'])->group(function () {
+            Route::get('/medical-requests', [MedicalRequestController::class, 'index'])->name('medical-requests');
+        });
     });
 });

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\AppointmentRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
@@ -61,10 +62,9 @@ final class AppointmentRequestTable extends PowerGridComponent
         $user = auth()->user();
 
         if ($user->role === 'admin' || $user->role === 'super_admin' || $user->role === 'receptionist') {
-            return AppointmentRequest::query()->orderBy('id', 'desc');
+            return AppointmentRequest::with('patient')->orderBy('id', 'desc');
         } elseif ($user->role === 'patient') {
             return AppointmentRequest::where('patient_id', auth()->id())
-                ->with('user')
                 ->orderBy('id', 'desc');
         } elseif ($user->role === 'doctor') {
             return AppointmentRequest::whereHas('medicalRequest', function ($query) use ($user) {
@@ -86,8 +86,11 @@ final class AppointmentRequestTable extends PowerGridComponent
 
     public function fields(): PowerGridFields
     {
-        return PowerGrid::fields()
+        $powerGrid = PowerGrid::fields()
             ->add('id')
+            ->add('patient', function ($dish) {
+                return $dish->patient->fullName;
+            })
             ->add('estimated_datetime')
             ->add('is_urgent', function ($dish) {
                 return $dish->is_urgent ? __('Yes') : __('No');
@@ -103,12 +106,24 @@ final class AppointmentRequestTable extends PowerGridComponent
             })
             ->add('motive')
             ->add('created_at');
+
+        if (Auth::user()->role !== 'patient') {
+            $powerGrid->add('patient', function ($dish) {
+                return $dish->patient->fullName;
+            });
+        }
+
+        return $powerGrid;
     }
 
     public function columns(): array
     {
         return [
             Column::make('Id', 'id'),
+
+            Column::make(__('Patient'), 'patient')
+                ->sortable()
+                ->searchable(),
 
             Column::make(__('Estimated datetime'), 'estimated_datetime')
                 ->sortable()

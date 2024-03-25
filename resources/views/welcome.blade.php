@@ -841,7 +841,7 @@
                             class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('Dashboard') }}</a>
 
                     @else
-                        <a href="{{ route('dashboard') }}"
+                        <a href="{{ route('clinic.dashboard') }}"
                             class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('Dashboard') }}</a>
                     @endif
                 @else

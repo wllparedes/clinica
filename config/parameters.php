@@ -13,5 +13,12 @@ return [
     'gender' => [
         'M' => 'Hombre',
         'W' => 'Mujer',
+    ],
+
+    'status' => [
+        'pending' => 'Pendiente',
+        'approved' => 'Aprobado',
+        'rejected' => 'Rechazado',
     ]
+
 ];

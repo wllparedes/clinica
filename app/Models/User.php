@@ -116,6 +116,6 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return "{$this->name} {$this->paternal} {$this->maternal}";
+        return "{$this->names} {$this->paternal} {$this->maternal}";
     }
 }

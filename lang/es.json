@@ -391,5 +391,7 @@
     "Create a new patient": "Crear un nuevo paciente",
     "Medical appointment request": "Solicitud de cita médica",
     "Appointment created": "Cita creada",
-    "The appointment has been created successfully": "La cita ha sido creada exitosamente"
+    "The appointment has been created successfully": "La cita ha sido creada exitosamente",
+    "Patient": "Paciente",
+    "Assign a medical appointment": "Asignar una cita médica"
 }

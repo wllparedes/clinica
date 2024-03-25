@@ -18,7 +18,7 @@ class AppointmentRequest extends Model
         'patient_id',
     ];
 
-    public function user()
+    public function patient()
     {
         return $this->belongsTo(User::class, 'patient_id');
     }

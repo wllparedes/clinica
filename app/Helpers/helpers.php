@@ -17,6 +17,12 @@ function verifyAvatar($file)
 }
 
 
+function setStatus($dish)
+{
+    return config('parameters.status')[$dish->status];
+}
+
+
 
 // CARBON
 

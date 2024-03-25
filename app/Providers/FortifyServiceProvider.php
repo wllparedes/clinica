@@ -57,9 +57,9 @@ class FortifyServiceProvider extends ServiceProvider
 
                     $home = match ($roleUser) {
                         'admin', 'super_admin' => route('admin.dashboard'),
-                        'patient' => route('patient.dashboard'),
-                        'doctor' => route('doctor.dashboard'),
-                        'receptionist' => route('receptionist.dashboard'),
+                        'patient' => route('clinic.dashboard'),
+                        'doctor' => route('clinic.dashboard'),
+                        'receptionist' => route('clinic.dashboard'),
                         default => route('home'),
                     };
 
