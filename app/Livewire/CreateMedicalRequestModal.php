@@ -32,10 +32,27 @@ class CreateMedicalRequestModal extends Component
         ];
     }
 
-
     public function save()
     {
-        $this->createForm->save();
+        $medicalRequest =  $this->createForm->save();
+
+        if ($medicalRequest) {
+
+            $medicalRequest->notifications()->create([
+                'title' => __('New medical appointment with identifier: ') . $medicalRequest->id,
+                'description' => __('A new medical appointment has been assigned to you, check with details.'),
+                'type' => 'success',
+            ]);
+
+            $this->dispatch('medicalRequestCreated');
+
+            $this->open = false;
+
+            $this->notification()->success(
+                $title = __('Medical appointment created'),
+                $description = __('The medical appointment has been created successfully'),
+            );
+        }
     }
 
     // public function loadAppointmentData()

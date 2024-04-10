@@ -24,7 +24,7 @@ class AppointmentController extends Controller
 
     public function getAppointments()
     {
-        return AppointmentRequest::where('status', 'pending')->get();
+        return AppointmentRequest::where('status', 'pending')->doesntHave('medicalRequest')->get();
     }
 
     public function getDoctors()

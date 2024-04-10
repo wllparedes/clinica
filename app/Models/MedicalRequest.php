@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Notification;
+
 
 class MedicalRequest extends Model
 {
@@ -25,5 +27,10 @@ class MedicalRequest extends Model
     public function doctor()
     {
         return $this->belongsTo(User::class, 'doctor_id');
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
     }
 }

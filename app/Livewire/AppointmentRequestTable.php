@@ -26,7 +26,7 @@ final class AppointmentRequestTable extends PowerGridComponent
 
     public string $loadingComponent = 'components.loading';
 
-    protected $listeners = ['patientCreated' => 'refresh'];
+    protected $listeners = ['patientCreated' => 'refresh', 'medicalRequestCreated' => 'refresh'];
 
     public function refresh(): void
     {

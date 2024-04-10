@@ -393,5 +393,9 @@
     "Appointment created": "Cita creada",
     "The appointment has been created successfully": "La cita ha sido creada exitosamente",
     "Patient": "Paciente",
-    "Assign a medical appointment": "Asignar una cita médica"
+    "Assign a medical appointment": "Asignar una cita médica",
+    "New medical appointment with identifier: :identifier": "Nueva cita médica con identificador: :identifier",
+    "A new medical appointment has been assigned to you, check with details.": "Se le ha asignado una nueva cita médica, revise con detalles.",
+    "Mark as read": "Marcar como leído",
+    "No notifications": "No hay notificaciones"
 }

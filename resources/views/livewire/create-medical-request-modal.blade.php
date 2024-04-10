@@ -16,8 +16,8 @@
             <x-select label="Seleccione un doctor" wire:model.live="createForm.doctor_id"
                 placeholder="Selecciona un doctor" :async-data="route('clinic.doctor.all')" option-label="names" option-value="id" />
 
-            <x-datetime-picker label="Fecha y hora de la cita" placeholder="Fecha y hora de la cita" wire:model="model"
-                :min="now()" :max="now()->addDays(30)->hours(12)->minutes(30)" />
+            <x-datetime-picker label="Fecha y hora de la cita" placeholder="Fecha y hora de la cita"
+                parse-format="YYYY-MM-DD HH:mm" wire:model="createForm.estimate" :min="now()" :max="now()->addDays(30)->hours(12)->minutes(30)" />
 
             <x-select label="Seleccione un estado" wire:model.live="createForm.status" :options="$states"
                 placeholder="Seleccione un estado" option-label="label" option-value="value" />

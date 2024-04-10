@@ -24,4 +24,8 @@ class Notification extends Model
         return $this->morphTo();
     }
 
+    public function medicalRequest()    
+    {
+        return $this->belongsTo(MedicalRequest::class, 'notifiable_id');
+    }
 }
