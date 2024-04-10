@@ -98,10 +98,14 @@ final class MedicalRequestTable extends PowerGridComponent
             Column::make('Id', 'id'),
             Column::make('Appointment id', 'appointment_id'),
             Column::make('Patient', 'patient_name')->searchable(),
+
         ];
 
         if ($this->user->role !== 'doctor') {
-            array_push($columns, Column::make('Date', 'date_formatted', 'date')->sortable());
+            array_push(
+                $columns,
+                Column::make('Doctor', 'doctor_names')->searchable()
+            );
         }
 
         array_push(
