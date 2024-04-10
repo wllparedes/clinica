@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\MedicalRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
@@ -24,9 +25,13 @@ final class MedicalRequestTable extends PowerGridComponent
 
     public string $loadingComponent = 'components.loading';
 
+    public $user;
+
     public function setUp(): array
     {
         $this->showCheckBox();
+
+        $this->user = Auth::user();
 
         return [
             // Exportable::make('export')
@@ -43,16 +48,15 @@ final class MedicalRequestTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        $user = auth()->user();
 
-        if ($user->role == 'doctor') {
-            return MedicalRequest::where('doctor_id', $user->id);
-        } elseif ($user->role == 'patient') {
-            return MedicalRequest::whereHas('appointment', function ($query) use ($user) {
-                $query->where('patient_id', $user->id);
+        if ($this->user->role == 'doctor') {
+            return MedicalRequest::where('doctor_id', $this->user->id)->with('appointment.patient');
+        } elseif ($this->user->role == 'patient') {
+            return MedicalRequest::whereHas('appointment', function ($query) {
+                $query->where('patient_id', $this->user->id);
             });
-        } elseif ($user->role == 'admin' || $user->role == 'super_admin' || $user->role == 'receptionist') {
-            return MedicalRequest::with('doctor');
+        } elseif ($this->user->role == 'admin' || $this->user->role == 'super_admin' || $this->user->role == 'receptionist') {
+            return MedicalRequest::with('doctor')->with('appointment.patient');
         }
     }
 
@@ -63,11 +67,12 @@ final class MedicalRequestTable extends PowerGridComponent
 
     public function fields(): PowerGridFields
     {
-        return PowerGrid::fields()
+
+        $powerGrid = PowerGrid::fields()
             ->add('id')
             ->add('appointment_id')
-            ->add('doctor_names', function ($dish) {
-                return $dish->doctor->full_name;
+            ->add('patient_name', function ($dish) {
+                return $dish->appointment->patient->full_name;
             })
             ->add('date_formatted', fn (MedicalRequest $model) => Carbon::parse($model->date)->format('d/m/Y'))
             ->add('time')
@@ -75,34 +80,46 @@ final class MedicalRequestTable extends PowerGridComponent
                 return setStatus($dish);
             })
             ->add('created_at');
+
+
+        if ($this->user->role !== 'doctor') {
+            $powerGrid->add('doctor_names', function ($dish) {
+                return $dish->doctor->full_name;
+            });
+        }
+
+        return $powerGrid;
     }
 
     public function columns(): array
     {
-        return [
+
+        $columns = [
             Column::make('Id', 'id'),
             Column::make('Appointment id', 'appointment_id'),
-            Column::make('Doctor', 'doctor_names'),
-            Column::make('Date', 'date_formatted', 'date')
-                ->sortable(),
+            Column::make('Patient', 'patient_name')->searchable(),
+        ];
 
+        if ($this->user->role !== 'doctor') {
+            array_push($columns, Column::make('Date', 'date_formatted', 'date')->sortable());
+        }
+
+        array_push(
+            $columns,
+            Column::make('Date', 'date_formatted', 'date')->sortable(),
             Column::make(__('Time'), 'time')
                 ->sortable()
                 ->searchable(),
-
             Column::make(__('Status'), 'status')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable(),
-
             Column::make('Created at', 'created_at')
                 ->sortable()
                 ->searchable()
+        );
 
-            // Column::action('Action')
-        ];
+        return $columns;
     }
 
     public function filters(): array

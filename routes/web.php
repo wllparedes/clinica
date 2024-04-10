@@ -3,7 +3,6 @@
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\MedicalRequest\MedicalRequestController;
-use App\Http\Controllers\Receptionist\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
