@@ -408,5 +408,9 @@
     "Update your account personal information.": "Actualice la información personal de su cuenta.",
     "Phone Emergency": "Teléfono de emergencia",
     "Medical appointment created": "Cita médica creada",
-    "The medical appointment has been created successfully": "La cita médica ha sido creada exitosamente"
+    "The medical appointment has been created successfully": "La cita médica ha sido creada exitosamente",
+    "Stock": "Existencias",
+    "Description": "Descripción",
+    "Category": "Categoría",
+    "Subcategory": "Subcategoría"
 }

@@ -36,10 +36,7 @@
 
             {{-- <livewire:create-patient-modal /> --}}
 
-            {{-- <livewire:patient-table /> --}}
-
-            <h4>Hola perro</h4>
-
+            <livewire:product-table />
 
         </div>
     </div>
