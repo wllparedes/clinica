@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "copy-images": "copyfiles -u 1 resources/img/**/* public",
+        "copy-images": "copyfiles -u 1 resources/images/**/* public",
         "dev": "npm run copy-images && vite",
         "build": "npm run copy-images && vite build"
     },

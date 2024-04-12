@@ -34,7 +34,7 @@ function setRole($dish)
  */
 function getFlagCountry($key)
 {
-    $src = 'img/countries/' . $key . '.png';
+    $src = 'images/countries/' . $key . '.png';
     $fileExists = file_exists(public_path($src));
     return $fileExists ? asset($src) : asset('img/countries/500.png');
 }
