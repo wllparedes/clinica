@@ -420,5 +420,12 @@
     "Enter the description": "Ingrese la descripción",
     "Enter the stock": "Ingrese las existencias",
     "Enter the price": "Ingrese el precio",
-    "Select a category": "Seleccione una categoría"
+    "Select a category": "Seleccione una categoría",
+    "Are you Sure?": "¿Estás seguro?",
+    "Delete this product?": "Eliminar este producto?",
+    "Yes, delete it": "Sí, borrarlo",
+    "Operation canceled": "Operación cancelada",
+    "The product has been deleted successfully.": "El producto ha sido eliminado exitosamente.",
+    "The product has been updated successfully.": "El producto ha sido actualizado exitosamente.",
+    "Product not found": "Producto no encontrado"
 }

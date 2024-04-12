@@ -16,10 +16,13 @@ use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Responsive;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use WireUi\Traits\Actions;
 
 final class ProductTable extends PowerGridComponent
 {
     use WithExport;
+    use Actions;
+
 
     public bool $deferLoading = true;
 
@@ -83,7 +86,8 @@ final class ProductTable extends PowerGridComponent
             ->add('category', function ($dish) {
                 return $dish->subcategory->category->name;
             })
-            ->add('status');
+            ->add('status')
+            ->add('action');
     }
 
     public function columns(): array
@@ -113,7 +117,7 @@ final class ProductTable extends PowerGridComponent
             Column::make(__('Status'), 'status')
                 ->toggleable(),
 
-            // Column::action('Action')
+            Column::action('Action')
         ];
     }
 
@@ -122,22 +126,64 @@ final class ProductTable extends PowerGridComponent
         return [];
     }
 
-    // #[\Livewire\Attributes\On('edit')]
-    // public function edit($rowId): void
-    // {
-    //     $this->js('alert(' . $rowId . ')');
-    // }
+    #[\Livewire\Attributes\On('edit')]
+    public function edit($rowId): void
+    {
+        $this->js('alert(' . $rowId . ')');
+    }
 
-    // public function actions(Product $row): array
-    // {
-    //     return [
-    //         Button::add('edit')
-    //             ->slot('Edit: ' . $row->id)
-    //             ->id()
-    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-    //             ->dispatch('edit', ['rowId' => $row->id])
-    //     ];
-    // }
+    #[\Livewire\Attributes\On('delete')]
+    public function delete($rowId): void
+    {
+
+        $this->notification()->confirm([
+            'title'       => __('Are you Sure?'),
+            'description' => __('Delete this product?'),
+            'acceptLabel' => __('Yes, delete it'),
+            'method'      => 'deleteProduct',
+            'params'      => $rowId,
+            'reject' => [
+                'label'  => __('Cancel'),
+                'method' => 'cancel',
+            ],
+        ]);
+    }
+
+    public function deleteProduct(Product $product): void
+    {
+
+        if ($product) {
+
+            $product->delete();
+            $this->notification()->success(__('The product has been deleted successfully.'));
+        } else {
+
+            $this->notification()->error(__('Product not found'));
+        }
+    }
+
+    public function cancel(): void
+    {
+        $this->notification()->info(__('Operation canceled'));
+    }
+
+    public function actions(Product $row): array
+    {
+        return [
+            Button::add('edit')
+                ->slot(__('Edit'))
+                ->id()
+                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->dispatch('edit', ['rowId' => $row->id]),
+
+            Button::add('delete')
+                ->slot(__('Delete'))
+                ->id()
+                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->dispatch('delete', ['rowId' => $row->id]),
+
+        ];
+    }
 
     /*
     public function actionRules($row): array
