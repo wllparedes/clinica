@@ -434,5 +434,8 @@
     "The specialty has been created successfully.": "La especialidad ha sido creada exitosamente.",
     "Delete this specialty?": "¿Eliminar esta especialidad?",
     "The specialty has been deleted successfully.": "La especialidad ha sido eliminada exitosamente.",
-    "Specialty not found": "Especialidad no encontrada"
+    "Specialty not found": "Especialidad no encontrada",
+    "Edit a new specialty": "Editar una especialidad",
+    "Specialty Updated": "Especialidad actualizada",
+    "The specialty has been updated successfully.": "La especialidad ha sido actualizada exitosamente."
 }

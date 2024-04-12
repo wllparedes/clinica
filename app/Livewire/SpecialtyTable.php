@@ -27,7 +27,7 @@ final class SpecialtyTable extends PowerGridComponent
 
     public string $loadingComponent = 'components.loading';
 
-    protected $listeners = ['specialtyCreated' => 'refresh'];
+    protected $listeners = ['specialtyCreated' => 'refresh', 'specialtyUpdated' => 'refresh'];
 
     public function refresh(): void
     {
@@ -147,7 +147,7 @@ final class SpecialtyTable extends PowerGridComponent
                 ->slot('<x-icon name="pencil" class="w-5 h-5" />')
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id]),
+                ->dispatch('editSpecialty', [$row->id]),
             Button::add('delete')
                 ->slot('<x-icon name="trash" class="w-5 h-5" />')
                 ->id()

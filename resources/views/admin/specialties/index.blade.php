@@ -36,6 +36,8 @@
 
             <livewire:create-specialty-modal />
 
+            <livewire:edit-specialty-modal />
+
             <livewire:specialty-table />
 
         </div>
