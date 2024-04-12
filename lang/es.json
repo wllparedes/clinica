@@ -412,5 +412,13 @@
     "Stock": "Existencias",
     "Description": "Descripción",
     "Category": "Categoría",
-    "Subcategory": "Subcategoría"
+    "Subcategory": "Subcategoría",
+    "Create a new product": "Crear nuevo producto",
+    "Product created": "Producto creado",
+    "The product has been created successfully.": "El producto ha sido creado exitosamente.",
+    "Enter the name": "Ingrese el nombre",
+    "Enter the description": "Ingrese la descripción",
+    "Enter the stock": "Ingrese las existencias",
+    "Enter the price": "Ingrese el precio",
+    "Select a category": "Seleccione una categoría"
 }

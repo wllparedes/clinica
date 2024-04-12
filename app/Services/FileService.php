@@ -83,7 +83,7 @@ class FileService
     private function storeInStorage($directory, $filename, $file, $storage)
     {
 
-        $file_path = Storage::disk($storage)->put($directory, $file, $filename);
+        $file_path = Storage::disk($storage)->put($directory, $file, ['visibility' => 'public']);
         // $file_url = Storage::disk($storage)->url($file_path);
         $file_url = asset('storage/' . $file_path);
 

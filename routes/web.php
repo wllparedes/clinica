@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\MedicalRequest\MedicalRequestController;
@@ -53,6 +54,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/products', function () {
                 return view('admin.products.index');
             })->name('products');
+
+            Route::controller(CategoryController::class)->group(function () {
+                Route::get('/categories', 'getCategories')->name('categories');
+                Route::get('/subCategories/{category}', 'getSubCategories')->name('subCategories');
+            });
         });
     });
 
