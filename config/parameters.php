@@ -19,6 +19,28 @@ return [
         'pending' => 'Pendiente',
         'approved' => 'Aprobado',
         'rejected' => 'Rechazado',
+    ],
+
+    'states' => [
+        ['label' => 'Pending', 'value' => 'pending'],
+        ['label' => 'Approved', 'value' => 'approved'],
+        ['label' => 'Rejected', 'value' => 'rejected'],
+    ],
+
+    'nationalities' => [
+        'peru' => 'Peru',
+        'argentina' => 'Argentina',
+        'bolivia' => 'Bolivia',
+        'brazil' => 'Brazil',
+        'chile' => 'Chile',
+        'colombia' => 'Colombia',
+        'ecuador' => 'Ecuador',
+        'paraguay' => 'Paraguay',
+        'uruguay' => 'Uruguay',
+        'venezuela' => 'Venezuela',
+        'mexico' => 'Mexico',
+        'unitedStates' => 'United States',
+        'canada' => 'Canada'
     ]
 
 ];

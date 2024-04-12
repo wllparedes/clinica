@@ -25,11 +25,7 @@ class CreateMedicalRequestModal extends Component
 
     public function mount()
     {
-        $this->states = [
-            ['label' => __('Pending'), 'value' => 'pending'],
-            ['label' => __('Approved'), 'value' => 'approved'],
-            ['label' => __('Rejected'), 'value' => 'rejected'],
-        ];
+        $this->states = config('parameters.states');
     }
 
     public function save()

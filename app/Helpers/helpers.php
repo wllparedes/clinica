@@ -27,7 +27,17 @@ function setRole($dish)
     return config('parameters.roles')[$dish->role];
 }
 
-
+/**
+ * Get the flag of the country
+ * @param string $key Country key
+ * @return string
+ */
+function getFlagCountry($key)
+{
+    $src = 'img/countries/' . $key . '.png';
+    $fileExists = file_exists(public_path($src));
+    return $fileExists ? asset($src) : asset('img/countries/500.png');
+}
 
 // CARBON
 

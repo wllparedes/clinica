@@ -8,10 +8,23 @@
 
     <div class="p-4 sm:ml-64 pt-10">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+
+            {{-- profile information --}}
+
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile.update-profile-information-form')
                 <x-section-border />
             @endif
+
+            {{-- personal information --}}
+
+            <div class="mt-10 sm:mt-0">
+                @livewire('update-personal-information-form')
+            </div>
+
+            <x-section-border />
+
+            {{-- updated password --}}
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0">
@@ -20,6 +33,7 @@
 
                 <x-section-border />
             @endif
+
 
 
             {{-- @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
