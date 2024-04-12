@@ -4,44 +4,58 @@
     <div class="h-full px-3 pb-4 overflow-y-auto dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
-                <a href="{{ route('admin.dashboard') }}" wire:navigate
+                <a href="{{ route('admin.dashboard') }}"
                     class="{{ setActive('admin.dashboard') }} flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="home" class="w-5 h-5" />
-                    <span class="ms-3">Inicio</span>
+                    <span class="ms-3">{{ __('Home') }}</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.staff') }}" wire:navigate
+                <a href="{{ route('admin.staff') }}"
                     class="{{ setActive('admin.staff') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="users" class="w-5 h-5" />
-                    <span class="flex-1 ms-3 whitespace-nowrap">Personal</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">{{ __('Staff') }}</span>
                     {{-- <span
                         class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> --}}
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.patients') }}" wire:navigate
+                <a href="{{ route('admin.patients') }}"
                     class="{{ setActive('admin.patients') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="user" class="w-5 h-5" />
-                    <span class="flex-1 ms-3 whitespace-nowrap">Pacientes</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">{{ __('Patients') }}</span>
                     {{-- <span
                         class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> --}}
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.appointments') }}" wire:navigate
+                <a href="{{ route('admin.appointments') }}"
                     class="{{ setActive('admin.appointments') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="annotation" class="w-5 h-5" />
-                    <span class="flex-1 ms-3 whitespace-nowrap">Solicitudes de citas</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap"> {{ __('Appointment requests') }} </span>
                 </a>
             </li>
+
             <li>
-                <a href="{{ route('admin.medical-requests') }}" wire:navigate
+                <a href="{{ route('admin.medical-requests') }}"
                     class="{{ setActive('admin.medical-requests') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="calendar" class="w-5 h-5" />
-                    <span class="flex-1 ms-3 whitespace-nowrap">Citas médicas</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">{{ __('Medical appointments') }} </span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('admin.products') }}"
+                    class="{{ setActive('admin.products') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
+                    <x-icon name="puzzle" class="w-5 h-5" />
+                    <span class="flex-1 ms-3 whitespace-nowrap"> {{ __('Products') }} </span>
+                </a>
+            </li>
+
+
+
+
+
             {{-- <li>
                 <a href="#"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

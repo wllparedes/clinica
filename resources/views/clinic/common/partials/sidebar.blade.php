@@ -4,28 +4,28 @@
     <div class="h-full px-3 pb-4 overflow-y-auto dark:bg-gray-800 soft-scrollbar">
         <ul class="space-y-2 font-medium">
             <li>
-                <a href="{{ route('clinic.dashboard') }}" wire:navigate
+                <a href="{{ route('clinic.dashboard') }}"
                     class="{{ setActive('clinic.dashboard') }} flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="home" class="w-5 h-5" />
-                    <span class="ms-3">Inicio</span>
+                    <span class="ms-3"> {{ __('Home') }} </span>
                 </a>
             </li>
 
             @can('denyDoctor')
                 <li>
-                    <a href="{{ route('clinic.appointments') }}" wire:navigate
+                    <a href="{{ route('clinic.appointments') }}"
                         class="{{ setActive('clinic.appointments') }} flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                         <x-icon name="annotation" class="w-5 h-5" />
-                        <span class="flex-1 ms-3 whitespace-nowrap">Solicitudes de citas</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">{{ __('Appointment requests') }}</span>
                     </a>
                 </li>
             @endcan
 
             <li>
-                <a href="{{ route('clinic.medical-requests') }}" wire:navigate
+                <a href="{{ route('clinic.medical-requests') }}"
                     class="{{ setActive('clinic.medical-requests') }} flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
                     <x-icon name="calendar" class="w-5 h-5" />
-                    <span class="flex-1 ms-3 whitespace-nowrap">Citas médicas</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">{{ __('Medical appointments') }} </span>
                 </a>
             </li>
 

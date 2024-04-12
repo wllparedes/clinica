@@ -9,7 +9,7 @@
                         <a href="{{ route('clinic.dashboard') }}"
                             class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-cyan-600 dark:text-gray-400 dark:hover:text-white">
                             <x-icon name="home" class="w-3 h-3 me-2.5" solid />
-                            Inicio
+                            {{ __('Home') }}
                         </a>
                     </li>
                     <li>
@@ -20,8 +20,9 @@
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <a href="{{ route('clinic.appointments') }}"
-                                class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Solicitar cita
-                                médicas</a>
+                                class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                                {{ __('Appointment requests') }}
+                            </a>
                         </div>
                     </li>
                 </ol>

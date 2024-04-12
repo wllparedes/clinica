@@ -19,9 +19,9 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="{{ route('admin.staff') }}"
+                            <a href="{{ route('admin.products') }}"
                                 class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                {{ __('Staff') }}
+                                {{ __('Products') }}
                             </a>
                         </div>
                     </li>
@@ -34,9 +34,12 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-400 border-dashed rounded-lg dark:border-gray-700">
 
-            <livewire:create-staff-modal />
+            {{-- <livewire:create-patient-modal /> --}}
 
-            <livewire:staff-table />
+            {{-- <livewire:patient-table /> --}}
+
+            <h4>Hola perro</h4>
+
 
         </div>
     </div>

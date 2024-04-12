@@ -49,6 +49,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/medical-requests', function () {
                 return view('admin.medical-requests.index');
             })->name('medical-requests');
+
+            Route::get('/products', function () {
+                return view('admin.products.index');
+            })->name('products');
         });
     });
 
