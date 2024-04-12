@@ -16,10 +16,12 @@ use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Responsive;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use WireUi\Traits\Actions;
 
 final class SpecialtyTable extends PowerGridComponent
 {
     use WithExport;
+    use Actions;
 
     public bool $deferLoading = true;
 
@@ -53,7 +55,7 @@ final class SpecialtyTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Specialty::query();
+        return Specialty::orderBy('id', 'desc');
     }
 
     public function relationSearch(): array
@@ -66,7 +68,9 @@ final class SpecialtyTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('name')
-            ->add('description')
+            ->add('description', function ($dish) {
+                return $dish->description ?? '-';
+            })
             ->add('created_at');
     }
 
@@ -101,14 +105,54 @@ final class SpecialtyTable extends PowerGridComponent
         $this->js('alert(' . $rowId . ')');
     }
 
+    #[\Livewire\Attributes\On('delete')]
+    public function delete($rowId): void
+    {
+        $this->notification()->confirm([
+            'title'       => __('Are you Sure?'),
+            'description' => __('Delete this specialty?'),
+            'acceptLabel' => __('Yes, delete it'),
+            'method'      => 'deleteSpecialty',
+            'params'      => $rowId,
+            'reject' => [
+                'label'  => __('Cancel'),
+                'method' => 'cancel',
+            ],
+        ]);
+    }
+
+    public function deleteSpecialty(Specialty $specialty)
+    {
+        if ($specialty) {
+
+            $specialty->delete();
+
+            $this->notification()->success(__('The specialty has been deleted successfully.'));
+        } else {
+
+            $this->notification()->error(__('Specialty not found'));
+        }
+    }
+
+    public function cancel(): void
+    {
+        $this->notification()->info(__('Operation canceled'));
+    }
+
+
     public function actions(Specialty $row): array
     {
         return [
             Button::add('edit')
-                ->slot('Edit: ' . $row->id)
+                ->slot('<x-icon name="pencil" class="w-5 h-5" />')
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->dispatch('edit', ['rowId' => $row->id]),
+            Button::add('delete')
+                ->slot('<x-icon name="trash" class="w-5 h-5" />')
+                ->id()
+                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->dispatch('delete', ['rowId' => $row->id]),
         ];
     }
 

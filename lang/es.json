@@ -422,11 +422,17 @@
     "Enter the price": "Ingrese el precio",
     "Select a category": "Seleccione una categoría",
     "Are you Sure?": "¿Estás seguro?",
-    "Delete this product?": "Eliminar este producto?",
+    "Delete this product?": "¿Eliminar este producto?",
     "Yes, delete it": "Sí, borrarlo",
     "Operation canceled": "Operación cancelada",
     "The product has been deleted successfully.": "El producto ha sido eliminado exitosamente.",
     "The product has been updated successfully.": "El producto ha sido actualizado exitosamente.",
     "Product not found": "Producto no encontrado",
-    "Specialties": "Especialidades"
+    "Specialties": "Especialidades",
+    "Create a new specialty": "Crear una nueva especialidad",
+    "Specialty Created": "Especialidad creada",
+    "The specialty has been created successfully.": "La especialidad ha sido creada exitosamente.",
+    "Delete this specialty?": "¿Eliminar esta especialidad?",
+    "The specialty has been deleted successfully.": "La especialidad ha sido eliminada exitosamente.",
+    "Specialty not found": "Especialidad no encontrada"
 }
