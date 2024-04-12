@@ -3,35 +3,20 @@
 namespace App\Livewire;
 
 use App\Models\Notification;
+use App\Models\User;
 use Livewire\Component;
 
 class ViewNotifications extends Component
 {
 
     public $notifications = [];
-    public $user = null;
+    public User $user;
 
     public function loadNotifications()
     {
         $this->user = auth()->user();
 
-        if ($this->user->role === 'doctor') {
-
-            $notifications = Notification::whereHas('medicalRequest', function ($query) {
-                $query->where('doctor_id', $this->user->id);
-            })->get();
-        } else if ($this->user->role === 'patient') {
-
-            $notifications = Notification::whereHas('medicalRequest', function ($query) {
-                $query->whereHas('appointment', function ($query) {
-                    $query->where('patient_id', $this->user->id);
-                });
-            })->get();
-        } else {
-            $notifications = collect();
-        }
-
-        return $notifications;
+        return  $this->user->notifications()->get();
     }
 
     public function mount()

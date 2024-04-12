@@ -28,8 +28,8 @@
                             @endif
                         </div>
                         <div>
-                            <span class="font-medium">{{ $notification->title }}</span>
-                            <p class="text-sm text-gray-500">{{ $notification->description }}</p>
+                            <span class="font-medium">{{ __($notification->title) }}</span>
+                            <p class="text-sm text-gray-500">{{ __($notification->description) }}</p>
                         </div>
                     </div>
                     @if (!$notification->is_read)

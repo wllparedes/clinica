@@ -29,8 +29,4 @@ class MedicalRequest extends Model
         return $this->belongsTo(User::class, 'doctor_id');
     }
 
-    public function notifications()
-    {
-        return $this->morphMany(Notification::class, 'notifiable');
-    }
 }

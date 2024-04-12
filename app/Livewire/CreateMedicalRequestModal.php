@@ -3,7 +3,8 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\MedicalRequestCreateForm;
-use App\Models\AppointmentRequest;
+use App\Models\MedicalRequest;
+use App\Services\MedicalRequestService;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
@@ -12,11 +13,12 @@ class CreateMedicalRequestModal extends Component
 
     use Actions;
 
+
+    public MedicalRequestCreateForm $createForm;
+
     public $open = false;
     public $appointmentInfo;
     public $states = [];
-
-    public MedicalRequestCreateForm $createForm;
 
     public function openModal()
     {
@@ -34,11 +36,7 @@ class CreateMedicalRequestModal extends Component
 
         if ($medicalRequest) {
 
-            $medicalRequest->notifications()->create([
-                'title' => __('New medical appointment with identifier: ') . $medicalRequest->id,
-                'description' => __('A new medical appointment has been assigned to you, check with details.'),
-                'type' => 'success',
-            ]);
+            $this->createNotifications($medicalRequest);
 
             $this->dispatch('medicalRequestCreated');
 
@@ -51,12 +49,27 @@ class CreateMedicalRequestModal extends Component
         }
     }
 
-    // public function loadAppointmentData()
-    // {
-    //     dd('loadAppointmentData is running');
+    /**
+     * Create notifications for the patient and the doctor.
+     * $medicalRequest MedicalRequest
+     * @return void
+     */
+    public function createNotifications(MedicalRequest $medicalRequest)
+    {
+        $medicalRequest->load('appointment', 'appointment.patient', 'doctor');
 
-    //     $this->dispatchBrowserEvent('contentChanged');
-    // }
+        $medicalRequest->appointment->patient->notifications()->create([
+            'title' => 'You have a new medical appointment.',
+            'description' => 'A new medical appointment has been assigned to you, check with details.',
+            'type' => 'success',
+        ]);
+
+        $medicalRequest->doctor->notifications()->create([
+            'title' => 'New medical appointment assigned to you.',
+            'description' => 'A new medical appointment has been assigned to you, check with details.',
+            'type' => 'success',
+        ]);
+    }
 
     public function render()
     {
