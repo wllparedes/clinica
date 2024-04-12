@@ -16,4 +16,14 @@ class Product extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
+
+    public function file()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
 }
