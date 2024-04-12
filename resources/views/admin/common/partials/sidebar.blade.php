@@ -52,6 +52,14 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{ route('admin.specialties') }}"
+                    class="{{ setActive('admin.specialties') }}  flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group text-black hover:text-black">
+                    <x-icon name="academic-cap" class="w-5 h-5" />
+                    <span class="flex-1 ms-3 whitespace-nowrap"> {{ __('Specialties') }} </span>
+                </a>
+            </li>
+
 
 
 

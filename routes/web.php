@@ -55,6 +55,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
                 return view('admin.products.index');
             })->name('products');
 
+            Route::get('/specialties', function () {
+                return view('admin.specialties.index');
+            })->name('specialties');
+
             Route::controller(CategoryController::class)->group(function () {
                 Route::get('/categories', 'getCategories')->name('categories');
                 Route::get('/subCategories/{category}', 'getSubCategories')->name('subCategories');
