@@ -4,7 +4,7 @@ use Illuminate\Support\Carbon;
 
 function setActive($routeName)
 {
-    return request()->routeIs($routeName) ? 'bg-cyan-500 text-white' : '';
+    return request()->routeIs($routeName) ? 'bg-adp text-white' : '';
 }
 
 function verifyAvatar($file)

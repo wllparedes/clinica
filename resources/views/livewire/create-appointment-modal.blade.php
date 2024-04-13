@@ -1,5 +1,5 @@
 <div>
-    <x-button icon="annotation" dark label="{{ __('Medical appointment request') }}" wire:click="openModal" />
+    <x-button icon="annotation" teal label="{{ __('Medical appointment request') }}" wire:click="openModal" />
 
     <x-modal.card title="{{ __('Medical appointment request') }}" blur wire:model.defer="open">
 
@@ -29,11 +29,12 @@
         <x-slot name="footer">
             <div class="flex justify-end gap-x-4">
                 <div class="flex">
-                    <x-button flat label="Cancelar" x-on:click="close" />
-                    <x-button info label="Guardar" wire:click="save" />
+                    <x-button flat label="{{ __('Cancel') }}" x-on:click="close" />
+                    <x-button teal label="{{ __('Save') }}" wire:click="save" />
                 </div>
             </div>
         </x-slot>
+
     </x-modal.card>
 
 </div>

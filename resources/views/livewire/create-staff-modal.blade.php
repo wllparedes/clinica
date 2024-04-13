@@ -1,5 +1,5 @@
 <div>
-    <x-button icon="users" dark label="{{ __('Create a new staff') }}" wire:click="openModal" />
+    <x-button icon="users" teal label="{{ __('Create a new staff') }}" wire:click="openModal" />
 
     <x-modal.card title="{{ __('Create a new staff') }}" blur wire:model.defer="open">
 
@@ -48,8 +48,8 @@
         <x-slot name="footer">
             <div class="flex justify-end gap-x-4">
                 <div class="flex">
-                    <x-button flat label="Cancelar" x-on:click="close" />
-                    <x-button info label="Guardar" wire:click="save" />
+                    <x-button flat label="{{ __('Cancel') }}" x-on:click="close" />
+                    <x-button teal label="{{ __('Save') }}" wire:click="save" />
                 </div>
             </div>
         </x-slot>

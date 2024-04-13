@@ -1,4 +1,6 @@
 @import url('../../node_modules/@fontsource-variable/onest/index.css');
+@import url('default.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,6 +13,19 @@
 .phpdebugbar {
     font-family: 'Onest Variable', "Figtree" !important;
 }
+
+.bg-adp {
+    background-color: var(--color-primary);
+}
+
+.bg-adp-secondary {
+    background-color: var(--color-secondary);
+}
+
+.text-adp {
+    color: var(--color-primary);
+}
+
 
 
 /* .grid-container {

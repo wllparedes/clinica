@@ -1,7 +1,7 @@
 <div>
     <div class="flex items-center"> <button type="button" aria-expanded="false"
             data-dropdown-toggle="dropdown-notifications">
-            <x-icon name="bell" class="w-5 h-5 text-white" solid />
+            <x-icon name="bell" class="w-5 h-5 text-secondary-900" solid />
 
             {{-- @if ($unreadNotificationCount)
                 <span

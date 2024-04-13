@@ -15,6 +15,7 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Responsive;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 final class MedicalRequestTable extends PowerGridComponent
@@ -43,6 +44,8 @@ final class MedicalRequestTable extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
+            Responsive::make()
+                ->fixedColumns('dishes.name', Responsive::ACTIONS_COLUMN_NAME),
         ];
     }
 
