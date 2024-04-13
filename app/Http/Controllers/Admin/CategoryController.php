@@ -11,15 +11,25 @@ class CategoryController extends Controller
 {
     public function getCategories(Request $request): Collection
     {
-        return Category::select('id', 'name')->when($request->search, function ($q) use ($request) {
-            $q->where('name', 'like', '%' . $request->search . '%');
-        })->get();
+
+        if ($request->ajax()) {
+            return Category::select('id', 'name')->when($request->search, function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%');
+            })->get();
+        }
+
+        abort(403, 'Access denied');
     }
 
     public function getSubCategories(Request $request, Category $category): Collection
     {
-        return $category->subCategories()->select('id', 'name')->when($request->search, function ($q) use ($request) {
-            $q->where('name', 'like', '%' . $request->search . '%');
-        })->get();
+
+        if ($request->ajax()) {
+            return $category->subCategories()->select('id', 'name')->when($request->search, function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%');
+            })->get();
+        }
+
+        abort(403, 'Access denied');
     }
 }

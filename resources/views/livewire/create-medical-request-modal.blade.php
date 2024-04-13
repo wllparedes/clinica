@@ -9,12 +9,12 @@
 
             <div class="col-span-1 sm:col-span-2">
                 <x-select label="Seleccione una solicitud de cita" wire:model.live="createForm.appointment_id"
-                    wire:onSelect="loadAppointmentData" placeholder="Seleccione una solicitud de cita" :async-data="route('clinic.appointment.all')"
+                    wire:onSelect="loadAppointmentData" placeholder="Seleccione una solicitud de cita" :async-data="route('api.appointments')"
                     option-label="id" option-description="motive" option-value="id" />
             </div>
 
             <x-select label="Seleccione un doctor" wire:model.live="createForm.doctor_id"
-                placeholder="Selecciona un doctor" :async-data="route('clinic.doctor.all')" option-label="names" option-value="id" />
+                placeholder="Selecciona un doctor" :async-data="route('api.doctors')" option-label="names" option-value="id" />
 
             <x-datetime-picker label="Fecha y hora de la cita" placeholder="Fecha y hora de la cita"
                 parse-format="YYYY-MM-DD HH:mm" wire:model="createForm.estimate" :min="now()" :max="now()->addDays(30)->hours(12)->minutes(30)" />

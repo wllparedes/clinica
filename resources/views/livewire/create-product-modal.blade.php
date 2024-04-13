@@ -25,14 +25,14 @@
 
             <div class="col-span-1 sm:col-span-2">
                 <x-select label="{{ __('Select a category') }}" wire:model.live="createForm.category_id"
-                    placeholder="{{ __('Select a category') }}" :async-data="route('admin.categories')" option-label="name"
+                    placeholder="{{ __('Select a category') }}" :async-data="route('api.categories')" option-label="name"
                     option-value="id" />
             </div>
 
             @if ($createForm->category_id)
                 <div class="col-span-1 sm:col-span-2">
                     <x-select label="{{ __('Select a Sub category') }}" wire:model.live="createForm.subcategory_id"
-                        placeholder="{{ __('Select a Sub category') }}" :async-data="route('admin.subCategories', $createForm->category_id)" option-label="name"
+                        placeholder="{{ __('Select a Sub category') }}" :async-data="route('api.subCategories', $createForm->category_id)" option-label="name"
                         option-value="id" />
                 </div>
             @endif

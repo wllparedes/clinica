@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\MedicalRequest\MedicalRequestController;
@@ -58,11 +57,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/specialties', function () {
                 return view('admin.specialties.index');
             })->name('specialties');
-
-            Route::controller(CategoryController::class)->group(function () {
-                Route::get('/categories', 'getCategories')->name('categories');
-                Route::get('/subCategories/{category}', 'getSubCategories')->name('subCategories');
-            });
         });
     });
 
@@ -75,8 +69,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::middleware(['check.role:patient,receptionist'])->group(function () {
             Route::controller(AppointmentController::class)->group(function () {
                 Route::get('/appointments', 'index')->name('appointments');
-                Route::get('/appointments-all', 'getAppointments')->name('appointment.all');
-                Route::get('/doctors-all', 'getDoctors')->name('doctor.all');
             });
         });
 

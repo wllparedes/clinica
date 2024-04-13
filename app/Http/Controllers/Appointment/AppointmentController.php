@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Appointment;
 use App\Http\Controllers\Controller;
 use App\Models\AppointmentRequest;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -22,13 +23,22 @@ class AppointmentController extends Controller
         }
     }
 
-    public function getAppointments()
+    public function getAppointments(Request $request): Collection
     {
-        return AppointmentRequest::where('status', 'pending')->doesntHave('medicalRequest')->get();
+        if ($request->ajax()) {
+            return AppointmentRequest::where('status', 'pending')->doesntHave('medicalRequest')->get();
+        }
+
+        abort(403, 'Access denied');
     }
 
-    public function getDoctors()
+    public function getDoctors(Request $request): Collection
     {
-        return User::where('role', 'doctor')->where('available', 1)->where('status', 1)->get();
+
+        if ($request->ajax()) {
+            return User::where('role', 'doctor')->where('available', 1)->where('status', 1)->get();
+        }
+
+        abort(403, 'Access denied');
     }
 }
