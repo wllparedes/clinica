@@ -21,7 +21,7 @@
             <div class="flex justify-end gap-x-4">
                 <div class="flex">
                     <x-button flat label="{{ __('Cancel') }}" x-on:click="close" />
-                    <x-button info label="{{ __('Update') }}" wire:click="update" />
+                    <x-button teal label="{{ __('Update') }}" wire:click="update" />
                 </div>
             </div>
         </x-slot>

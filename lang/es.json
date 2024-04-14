@@ -437,5 +437,18 @@
     "Specialty not found": "Especialidad no encontrada",
     "Edit a new specialty": "Editar una especialidad",
     "Specialty Updated": "Especialidad actualizada",
-    "The specialty has been updated successfully.": "La especialidad ha sido actualizada exitosamente."
+    "The specialty has been updated successfully.": "La especialidad ha sido actualizada exitosamente.",
+    "Select a status": "Seleccione un estado",
+    "Appointment date and time": "Fecha y hora de la cita",
+    "Select the date and time": "Seleccione la fecha y hora",
+    "Doctor": "Doctor",
+    "Select a doctor": "Seleccione un doctor",
+    "Appointment request": "Solicitud de cita",
+    "Select an appointment request": "Seleccione una solicitud de cita",
+    "Date and time": "Fecha y hora",
+    "Estimated date and time": "Fecha y hora estimada",
+    "Commentary": "Comentario",
+    "Enter the commentary": "Ingrese el comentario",
+    "It is urgent?": "¿Es urgente?",
+    "Write the reason for the query": "Escriba el motivo de la consulta"
 }
