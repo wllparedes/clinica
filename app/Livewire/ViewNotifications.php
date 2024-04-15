@@ -11,6 +11,8 @@ class ViewNotifications extends Component
 
     public $notifications = [];
     public User $user;
+    public $open = false;
+    public $unReadCount;
 
     public function loadNotifications()
     {
@@ -19,9 +21,15 @@ class ViewNotifications extends Component
         return  $this->user->notifications()->get();
     }
 
+    public function close()
+    {
+        $this->open = false;
+    }
+
     public function mount()
     {
         $this->notifications = $this->loadNotifications();
+        $this->unReadCount = $this->notifications->where('is_read', 0)->count();
     }
 
     public function markAsRead(Notification $notification)
@@ -31,6 +39,7 @@ class ViewNotifications extends Component
         ]);
 
         $this->notifications = $this->loadNotifications();
+        $this->unReadCount = $this->notifications->where('is_read', 0)->count();
     }
 
     public function render()
