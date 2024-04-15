@@ -29,7 +29,7 @@ class MedicalAppointment extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Medical Appointment',
+            subject: __('Medical appointments'),
         );
     }
 
@@ -39,7 +39,7 @@ class MedicalAppointment extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.medical-notification',
+            markdown: 'emails.medical-notification',
         );
     }
 

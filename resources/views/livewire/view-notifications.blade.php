@@ -3,7 +3,11 @@
         <button type="button" aria-expanded="{{ $open }}" wire:click="$toggle('open')"
             class="transition-colors duration-200 ease-in-out hover:bg-slate-200 p-2 rounded-lg">
 
-            <x-icon name="bell" class="w-5 h-5" solid />
+            @if ($open)
+                <x-icon name="bell" class="w-5 h-5" solid />
+            @else
+                <x-icon name="bell" class="w-5 h-5" />
+            @endif
 
             @if ($unReadCount)
                 <span class="absolute px-1 py-1 text-2xs text-white bg-red-600 rounded-full top-2">
@@ -19,7 +23,7 @@
             <div class="px-2 py-2" role="none">
                 @forelse ($notifications as $notification)
                     <div
-                        class="flex items-center justify-between mb-2 p-2 rounded border-dashed border-2 hover:bg-slate-50 {{ $notification->is_read ? 'border-teal-500' : 'border-red-400' }} ">
+                        class="flex items-center justify-between mb-2 p-2 rounded border-dashed border-2 hover:bg-slate-50 {{ $notification->is_read ? 'border-teal-500' : 'border-red-400' }} hover:cursor-pointer">
                         <div class="flex items-center">
                             <div class="mr-2">
                                 @if ($notification->is_read)
