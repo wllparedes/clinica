@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\MedicalRequest\MedicalRequestController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,18 +63,23 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     // CLINIC
 
-    Route::group(['prefix' => 'clinic', 'as' => 'clinic.'], function () {
+    Route::middleware(['check.role:patient,receptionist,doctor'])->group(function () {
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile.show');
 
-        Route::middleware(['check.role:patient,receptionist'])->group(function () {
-            Route::controller(AppointmentController::class)->group(function () {
-                Route::get('/appointments', 'index')->name('appointments');
+        Route::group(['prefix' => 'clinic', 'as' => 'clinic.'], function () {
+
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+            Route::middleware(['check.role:patient,receptionist'])->group(function () {
+                Route::controller(AppointmentController::class)->group(function () {
+                    Route::get('/appointments', 'index')->name('appointments');
+                });
             });
-        });
 
-        Route::middleware(['check.role:doctor,patient,receptionist'])->group(function () {
-            Route::get('/medical-requests', [MedicalRequestController::class, 'index'])->name('medical-requests');
+            Route::middleware(['check.role:doctor,patient,receptionist'])->group(function () {
+                Route::get('/medical-requests', [MedicalRequestController::class, 'index'])->name('medical-requests');
+            });
         });
     });
 });

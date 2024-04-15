@@ -42,16 +42,21 @@
                             </p>
                         </div>
                         <ul class="py-1" role="none">
-                            <li>
-                                <a href="{{ route('profile.show') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Perfil</a>
-                            </li>
+
+                            @if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'super_admin')
+                                <li>
+                                    <a href="{{ route('profile.show') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Perfil</a>
+                                </li>
+                            @endif
+
                             {{-- <li>
                                 <a href="#"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Ajustes</a>
                             </li> --}}
+
                             <li>
                                 <form method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
