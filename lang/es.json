@@ -450,5 +450,8 @@
     "Commentary": "Comentario",
     "Enter the commentary": "Ingrese el comentario",
     "It is urgent?": "¿Es urgente?",
-    "Write the reason for the query": "Escriba el motivo de la consulta"
+    "Write the reason for the query": "Escriba el motivo de la consulta",
+    "Date": "Fecha",
+    "Time": "Hora",
+    "Appointment id": "ID Cita"
 }

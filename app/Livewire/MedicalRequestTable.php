@@ -59,7 +59,7 @@ final class MedicalRequestTable extends PowerGridComponent
                 $query->where('patient_id', $this->user->id);
             });
         } elseif ($this->user->role == 'admin' || $this->user->role == 'super_admin' || $this->user->role == 'receptionist') {
-            return MedicalRequest::with('doctor')->with('appointment.patient');
+            return MedicalRequest::with('doctor')->with('appointment.patient')->orderBy('id', 'desc');
         }
     }
 
@@ -77,7 +77,7 @@ final class MedicalRequestTable extends PowerGridComponent
             ->add('patient_name', function ($dish) {
                 return $dish->appointment->patient->full_name;
             })
-            ->add('date_formatted', fn (MedicalRequest $model) => Carbon::parse($model->date)->format('d/m/Y'))
+            ->add('date')
             ->add('time')
             ->add('status', function ($dish) {
                 return setStatus($dish);
@@ -98,30 +98,33 @@ final class MedicalRequestTable extends PowerGridComponent
     {
 
         $columns = [
-            Column::make('Id', 'id'),
-            Column::make('Appointment id', 'appointment_id'),
-            Column::make('Patient', 'patient_name')->searchable(),
+            Column::make('Id', 'id')
+                ->searchable()
+                ->sortable(),
+            Column::make(__('Appointment id'), 'appointment_id'),
+            Column::make(__('Patient'), 'patient_name'),
 
         ];
 
         if ($this->user->role !== 'doctor') {
             array_push(
                 $columns,
-                Column::make('Doctor', 'doctor_names')->searchable()
+                Column::make(__('Doctor'), 'doctor_names'),
             );
         }
 
         array_push(
             $columns,
-            Column::make('Date', 'date_formatted', 'date')->sortable(),
+            Column::make(__('Date'), 'date')
+                ->searchable()
+                ->sortable(),
             Column::make(__('Time'), 'time')
                 ->sortable()
                 ->searchable(),
             Column::make(__('Status'), 'status')
-                ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at')
+            Column::make(__('Created at'), 'created_at')
                 ->sortable()
                 ->searchable()
         );
@@ -131,9 +134,7 @@ final class MedicalRequestTable extends PowerGridComponent
 
     public function filters(): array
     {
-        return [
-            Filter::datepicker('date'),
-        ];
+        return [];
     }
 
     // #[\Livewire\Attributes\On('edit')]

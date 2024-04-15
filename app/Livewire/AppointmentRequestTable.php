@@ -133,7 +133,7 @@ final class AppointmentRequestTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make(__('Comment'), 'comment')
+            Column::make(__('Commentary'), 'comment')
                 ->sortable()
                 ->searchable(),
 
