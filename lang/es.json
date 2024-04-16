@@ -459,5 +459,12 @@
     "Staff not found": "Personal no encontrado",
     "Edit staff": "Editar personal",
     "Staff Updated": "Personal actualizado",
-    "The staff has been updated successfully.": "El personal ha sido actualizado exitosamente."
+    "The staff has been updated successfully.": "El personal ha sido actualizado exitosamente.",
+    "Delete this patient?": "¿Eliminar este paciente?",
+    "Patient not found": "Paciente no encontrado",
+    "The patient has been deleted successfully.": "El paciente ha sido eliminado exitosamente.",
+    "Patient Updated": "Paciente actualizado",
+    "The patient has been updated successfully.": "El paciente ha sido actualizado exitosamente.",
+    "Edit patient": "Editar paciente",
+    "The patient has been deleted successfully": "El paciente ha sido eliminado exitosamente"
 }

@@ -34,6 +34,8 @@
 
             <livewire:create-patient-modal />
 
+            <livewire:edit-patient-modal />
+
             <livewire:patient-table />
 
         </div>
