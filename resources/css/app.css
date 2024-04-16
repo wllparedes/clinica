@@ -26,6 +26,48 @@
     color: var(--color-primary);
 }
 
+.pg-btn {
+
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(226 232 240/var(--tw-ring-opacity));
+    align-items: center;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    -moz-column-gap: .5rem;
+    column-gap: 0.5rem;
+    display: inline-flex;
+    font-size: .875rem;
+    justify-content: center;
+    line-height: 1.25rem;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    padding: 0.5rem 0.75rem;
+    color: #fff;
+
+}
+
+.pg-btn:hover {
+    --tw-bg-opacity: 1;
+    --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.pg-btn-edit {
+    background-color: #eab308;
+}
+
+.pg-btn-edit:hover {
+    background-color: #ca8a04;
+}
+
+.pg-btn-delete {
+    background-color: #ef4444;
+}
+
+.pg-btn-delete:hover {
+    background-color: #dc2626;
+}
 
 
 /* .grid-container {

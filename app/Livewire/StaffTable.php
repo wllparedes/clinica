@@ -30,7 +30,7 @@ final class StaffTable extends PowerGridComponent
 
     public string $loadingComponent = 'components.loading';
 
-    protected $listeners = ['staffCreated' => 'refresh'];
+    protected $listeners = ['staffCreated' => 'refresh', 'staffUpdated' => 'refresh'];
 
     public function refresh(): void
     {
@@ -65,7 +65,7 @@ final class StaffTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::where('role', '!=', 'patient')->orderBy('id', 'desc');
+        return User::where('role', '!=', 'patient')->withCount('medicalRequests')->orderBy('id', 'desc');
     }
 
     public function relationSearch(): array
@@ -100,7 +100,8 @@ final class StaffTable extends PowerGridComponent
             ->add('role', function ($dish) {
                 return setRole($dish);
             })
-            ->add('status');
+            ->add('status')
+            ->add('action');
     }
 
     public function columns(): array
@@ -163,7 +164,7 @@ final class StaffTable extends PowerGridComponent
             Column::make(__('Status'), 'status')
                 ->toggleable(),
 
-            // Column::action('Action')
+            Column::action(__('Action'), 'action')
 
         ];
     }
@@ -174,39 +175,61 @@ final class StaffTable extends PowerGridComponent
     }
 
 
-    // #[\Livewire\Attributes\On('edit')]
-    // public function edit($rowId): void
-    // {
-    //     $this->js('alert(' . $rowId . ')');
-    // }
-
-
-    // public function actions(User $row): array
-    // {
-    //     return [
-    //         Button::add('edit')
-    //             ->slot('Edit: ' . $row->id)
-    //             ->id()
-    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-    //             ->dispatch('edit', ['rowId' => $row->id]),
-
-    //         Button::add('delete')
-    //             ->slot('Delete: ' . $row->id)
-    //             ->id()
-    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-    //             ->dispatch('delete', ['rowId' => $row->id]),
-    //     ];
-    // }
-
-    /*
-    public function actionRules($row): array
+    #[\Livewire\Attributes\On('delete')]
+    public function delete($rowId): void
     {
-       return [
-            // Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($row) => $row->id === 1)
-                ->hide(),
-        ];
+        $this->notification()->confirm([
+            'title'       => __('Are you Sure?'),
+            'description' => __('Delete this staff?'),
+            'acceptLabel' => __('Yes, delete it'),
+            'method'      => 'deleteStaff',
+            'params'      => $rowId,
+            'reject' => [
+                'label'  => __('Cancel'),
+                'method' => 'cancel',
+            ],
+        ]);
     }
-    */
+
+    public function deleteStaff(User $staff)
+    {
+        if ($staff) {
+
+            $staff->delete();
+
+            $this->notification()->success(__('The staff has been deleted successfully.'));
+        } else {
+
+            $this->notification()->error(__('Staff not found'));
+        }
+    }
+
+
+    public function cancel(): void
+    {
+        $this->notification()->info(__('Operation canceled'));
+    }
+
+
+    public function actions(User $row): array
+    {
+
+        $actions = [
+            Button::add('edit')
+                ->slot('<x-icon name="pencil" class="w-5 h-5" />')
+                ->id()
+                ->class('pg-btn pg-btn-edit')
+                ->dispatch('editStaff', [$row->id]),
+        ];
+
+        if ($row->medical_requests_count === 0) {
+            array_push($actions, Button::add('delete')
+                ->slot('<x-icon name="trash" class="w-5 h-5" />')
+                ->id()
+                ->class('pg-btn pg-btn-delete')
+                ->dispatch('delete', [$row->id]));
+        }
+
+        return $actions;
+    }
 }

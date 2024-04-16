@@ -99,12 +99,6 @@ final class SpecialtyTable extends PowerGridComponent
         return [];
     }
 
-    #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
-    {
-        $this->js('alert(' . $rowId . ')');
-    }
-
     #[\Livewire\Attributes\On('delete')]
     public function delete($rowId): void
     {
@@ -146,12 +140,12 @@ final class SpecialtyTable extends PowerGridComponent
             Button::add('edit')
                 ->slot('<x-icon name="pencil" class="w-5 h-5" />')
                 ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('pg-btn pg-btn-edit')
                 ->dispatch('editSpecialty', [$row->id]),
             Button::add('delete')
                 ->slot('<x-icon name="trash" class="w-5 h-5" />')
                 ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('pg-btn pg-btn-delete')
                 ->dispatch('delete', ['rowId' => $row->id]),
         ];
     }

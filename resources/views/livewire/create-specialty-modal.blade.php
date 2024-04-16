@@ -1,5 +1,5 @@
 <div>
-    <x-button icon="academic-cap" teal label="{{ __('Create a new specialty') }}" wire:click="openModal" />
+    <x-button icon="beaker" teal label="{{ __('Create a new specialty') }}" wire:click="openModal" />
 
     <x-modal.card title="{{ __('Create a new specialty') }}" blur wire:model.defer="open">
 

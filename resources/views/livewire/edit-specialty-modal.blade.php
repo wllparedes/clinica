@@ -1,6 +1,6 @@
 <div>
 
-    <x-modal.card title="{{ __('Edit a new specialty') }}" blur wire:model.defer="open">
+    <x-modal.card title="{{ __('Edit a specialty') }}" blur wire:model.defer="open">
 
         <x-errors class="mb-5" />
 

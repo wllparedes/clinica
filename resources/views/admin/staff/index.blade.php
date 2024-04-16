@@ -33,6 +33,8 @@
 
             <livewire:create-staff-modal />
 
+            <livewire:edit-staff-modal />
+
             <livewire:staff-table />
 
         </div>

@@ -435,7 +435,7 @@
     "Delete this specialty?": "¿Eliminar esta especialidad?",
     "The specialty has been deleted successfully.": "La especialidad ha sido eliminada exitosamente.",
     "Specialty not found": "Especialidad no encontrada",
-    "Edit a new specialty": "Editar una especialidad",
+    "Edit a specialty": "Editar una especialidad",
     "Specialty Updated": "Especialidad actualizada",
     "The specialty has been updated successfully.": "La especialidad ha sido actualizada exitosamente.",
     "Select a status": "Seleccione un estado",
@@ -453,5 +453,11 @@
     "Write the reason for the query": "Escriba el motivo de la consulta",
     "Date": "Fecha",
     "Time": "Hora",
-    "Appointment id": "ID Cita"
+    "Appointment id": "ID Cita",
+    "Delete this staff?": "¿Eliminar este personal?",
+    "The staff has been deleted successfully.": "El personal ha sido eliminado exitosamente.",
+    "Staff not found": "Personal no encontrado",
+    "Edit staff": "Editar personal",
+    "Staff Updated": "Personal actualizado",
+    "The staff has been updated successfully.": "El personal ha sido actualizado exitosamente."
 }

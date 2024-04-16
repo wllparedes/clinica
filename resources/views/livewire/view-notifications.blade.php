@@ -47,7 +47,7 @@
                         @endif
                     </div>
                 @empty
-                    <p class="text-sm text-gray-500">{{ __('No notifications') }} </p>
+                    <p class="text-sm p-4 text-center text-gray-500">{{ __('No notifications') }} </p>
                 @endforelse
             </div>
         </div>
