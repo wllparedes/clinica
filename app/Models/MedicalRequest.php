@@ -29,4 +29,9 @@ class MedicalRequest extends Model
         return $this->belongsTo(User::class, 'doctor_id');
     }
 
+    public function medicalHistory()
+    {
+        return $this->hasOne(MedicalHistory::class);
+    }
+
 }
