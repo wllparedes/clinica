@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\MedicalHistory;
 use App\Models\MedicalRequest;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -24,11 +25,11 @@ class MedicalHistoryCreateForm extends Form
     public $temperature;
 
 
-    public function save(MedicalRequest $medicalRequest)
+    public function save(MedicalRequest $medicalRequest): MedicalHistory
     {
         $this->validate();
 
-        $medicalRequest->medicalHistory()->create([
+        $medicalHistory  = $medicalRequest->medicalHistory()->create([
             'treatment' => $this->treatment,
             'diagnostic' => $this->diagnostic,
             'medication' => $this->medication,
@@ -39,5 +40,8 @@ class MedicalHistoryCreateForm extends Form
         ]);
 
         $this->reset();
+
+
+        return $medicalHistory;
     }
 }
