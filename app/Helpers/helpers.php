@@ -39,12 +39,42 @@ function getFlagCountry($key)
     return $fileExists ? asset($src) : asset('images/countries/500.png');
 }
 
+/**
+ * Get information about the appointment
+ * @param string $fullName Full name of the patient
+ * @param string $time Time of the appointment
+ * @return string
+ */
+function getInfoAppointment($fullName, $time)
+{
+    return __('Patient') . ': ' . $fullName . '<br>' . __('Time') . ': ' . $time;
+}
+
+function getGenderForUser($gender)
+{
+    $gender = config('parameters.gender')[$gender];
+    return __($gender);
+}
+
+
 // CARBON
 
 function getCurrentYear()
 {
     return Carbon::now('America/Lima')->format('Y');
 }
+
+
+function getDateForHumans($date)
+{
+    return Carbon::parse($date)->diffForHumans();
+}
+
+function getDateForHumansText($date)
+{
+    return Carbon::parse($date)->isoFormat('dddd D MMMM YYYY');
+}
+
 
 function getCurrentDateTime()
 {

@@ -40,14 +40,28 @@
 
     @section('scripts')
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 let calendarEl = document.getElementById('calendar');
                 let calendar = new FullCalendar.Calendar(calendarEl, {
                     locale: 'es',
-                    timeZone: 'America/Lima',
+                    timeZone: 'local',
+                    allDaySlot: false,
                     initialView: 'dayGridMonth',
                     events: @json($appointments),
+                    eventDidMount: function(info) {
+                        tippy(info.el, {
+                            content: info.event.extendedProps.description,
+                            allowHTML: true,
+                        });
+                    },
+                    eventClick: function(info) {
+                        window.location.href = "{{ route('clinic.medical-requests.show', '') }}/" + info
+                            .event
+                            .id;
+                    },
                     buttonText: {
                         today: 'Hoy'
                     },

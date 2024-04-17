@@ -79,6 +79,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
             Route::middleware(['check.role:doctor,patient,receptionist'])->group(function () {
                 Route::get('/medical-requests', [MedicalRequestController::class, 'index'])->name('medical-requests');
+                Route::get('/medical-requests/{medicalRequest}', [MedicalRequestController::class, 'show'])->name('medical-requests.show');
             });
         });
     });

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\MedicalRequest;
 
 use App\Http\Controllers\Controller;
+use App\Models\MedicalRequest;
+use DateInterval;
+use DateTime;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,14 +28,30 @@ class MedicalRequestController extends Controller
             $allAppointments = $user->medicalRequests->where('status', 'approved');
 
             foreach ($allAppointments as $appointment) {
+
+                $start = new DateTime($appointment->date . ' ' . $appointment->time);
+                $end = clone $start;
+                $end->add(new DateInterval('PT1H'));
+
                 $appointments[] = [
                     'id' => $appointment->id,
                     'title' => __('Appointment #') . $appointment->id,
-                    'start' => $appointment->date . ' ' . $appointment->time,
+                    'description' => getInfoAppointment($appointment->appointment->patient->full_name, $appointment->time),
+                    'start' => $start->format('Y-m-d H:i:s'),
+                    'end' => $end->format('Y-m-d H:i:s')
                 ];
             }
 
             return view('clinic.doctor.medical-requests.index', compact('appointments'));
         }
+    }
+
+
+    public function show(MedicalRequest $medicalRequest): View
+    {
+
+        $medicalRequest->load('appointment', 'appointment.patient', 'doctor',);
+
+        return view('clinic.doctor.medical-histories.index', compact('medicalRequest'));
     }
 }
