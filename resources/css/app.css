@@ -69,6 +69,9 @@
     background-color: #dc2626;
 }
 
+#calendar .fc-day-today {
+    background-color: #e5e5e5;
+}
 
 /* .grid-container {
     display: grid;

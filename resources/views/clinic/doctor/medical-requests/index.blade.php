@@ -33,9 +33,28 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-400 border-dashed rounded-lg dark:border-gray-700">
 
-            <livewire:medical-request-table />
+            <div id='calendar'></div>
 
         </div>
     </div>
+
+    @section('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let calendarEl = document.getElementById('calendar');
+                let calendar = new FullCalendar.Calendar(calendarEl, {
+                    locale: 'es',
+                    timeZone: 'America/Lima',
+                    initialView: 'dayGridMonth',
+                    events: @json($appointments),
+                    buttonText: {
+                        today: 'Hoy'
+                    },
+                });
+                calendar.render();
+            });
+        </script>
+    @endsection
 
 </x-app-layout-clinic>

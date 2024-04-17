@@ -466,5 +466,6 @@
     "Patient Updated": "Paciente actualizado",
     "The patient has been updated successfully.": "El paciente ha sido actualizado exitosamente.",
     "Edit patient": "Editar paciente",
-    "The patient has been deleted successfully": "El paciente ha sido eliminado exitosamente"
+    "The patient has been deleted successfully": "El paciente ha sido eliminado exitosamente",
+    "Appointment #": "Cita #"
 }
