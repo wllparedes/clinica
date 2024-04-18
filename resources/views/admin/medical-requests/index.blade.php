@@ -1,7 +1,7 @@
 <x-app-layout-admin>
 
     <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-400 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div class="p-4 border-2 border-gray-400 border-dashed rounded-lg dark:border-gray-700 mt-20">
 
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">

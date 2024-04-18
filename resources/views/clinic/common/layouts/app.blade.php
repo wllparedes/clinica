@@ -22,9 +22,6 @@
 
     @yield('styles')
 
-    <!-- Flowbite -->
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
-
     <!-- Wire UI -->
     <wireui:scripts />
 
@@ -65,8 +62,6 @@
     @stack('modals')
 
     @livewireScripts
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
     @yield('scripts')
 
