@@ -11,7 +11,8 @@
                 <x-sidebar-link route="clinic.appointments" icon="annotation" label="Appointment requests" />
             @endcan
 
-            <x-sidebar-link route="clinic.medical-requests" icon="calendar" label="Medical appointments" />
+            <x-sidebar-link route="clinic.medical-requests" icon="calendar" label="Medical appointments"
+                :spa="false" />
 
         </ul>
     </div>

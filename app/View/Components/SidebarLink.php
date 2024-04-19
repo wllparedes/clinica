@@ -13,15 +13,17 @@ class SidebarLink extends Component
     public $icon;
     public $label;
     public $qty;
+    public $spa;
     /**
      * Create a new component instance.
      */
-    public function __construct($route = 'login', $icon = 'question-mark-circle', $label = 'Unknown', $qty = 0)
+    public function __construct($route = 'login', $icon = 'question-mark-circle', $label = 'Unknown', $qty = 0, $spa = true)
     {
         $this->route = $route;
         $this->icon = $icon;
         $this->label = $label;
         $this->qty = $qty;
+        $this->spa = $spa;
     }
 
     /**

@@ -1,5 +1,5 @@
 <li>
-    <a href="{{ route($route) }}" wire:navigate.hover
+    <a href="{{ route($route) }}" {{ $spa ? 'wire:navigate' : '' }}
         class="{{ setActive($route . '*') }} flex justify-between p-2 rounded-lg dark:text-white hover:bg-slate-700 dark:hover:bg-gray-700 group text-white hover:text-adp">
 
         <div class="flex items-center">

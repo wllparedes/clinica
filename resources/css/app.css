@@ -1,5 +1,6 @@
 @import url('../../node_modules/@fontsource-variable/onest/index.css');
 @import url('default.css');
+@import 'tippy.js/dist/tippy.css';
 
 @tailwind base;
 @tailwind components;

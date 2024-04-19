@@ -38,37 +38,16 @@
         </div>
     </div>
 
-    @section('scripts')
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-        <script src="https://unpkg.com/tippy.js@6"></script>
+    @push('js')
+        @vite(['resources/js/medicalRequests.js'])
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                let calendarEl = document.getElementById('calendar');
-                let calendar = new FullCalendar.Calendar(calendarEl, {
-                    locale: 'es',
-                    timeZone: 'local',
-                    allDaySlot: false,
-                    initialView: 'dayGridMonth',
-                    events: @json($appointments),
-                    eventDidMount: function(info) {
-                        tippy(info.el, {
-                            content: info.event.extendedProps.description,
-                            allowHTML: true,
-                        });
-                    },
-                    eventClick: function(info) {
-                        window.location.href = "{{ route('clinic.medical-requests.show', '') }}/" + info
-                            .event
-                            .id;
-                    },
-                    buttonText: {
-                        today: 'Hoy'
-                    },
-                });
-                calendar.render();
+            document.addEventListener("livewire:initialized", function() {
+
+                let route = '{{ route('clinic.medical-requests.show', '') }}/'
+
+                initCalendar(@json($appointments), route);
             });
         </script>
-    @endsection
+    @endpush
 
 </x-app-layout-clinic>

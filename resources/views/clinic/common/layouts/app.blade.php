@@ -20,7 +20,7 @@
     <!-- Styles -->
     @livewireStyles
 
-    @yield('styles')
+    @stack('css')
 
     <!-- Wire UI -->
     <wireui:scripts />
@@ -63,7 +63,7 @@
 
     @livewireScripts
 
-    @yield('scripts')
+    @stack('js')
 
 </body>
 

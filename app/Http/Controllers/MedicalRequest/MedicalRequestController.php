@@ -54,4 +54,11 @@ class MedicalRequestController extends Controller
 
         return view('clinic.doctor.medical-histories.index', compact('medicalRequest'));
     }
+
+
+    public function setting()
+    {
+        return view('clinic.common.partials.setting');
+    }
+
 }
