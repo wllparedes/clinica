@@ -8,7 +8,6 @@ use Livewire\Component;
 class ViewProfile extends Component
 {
 
-    public $open = false;
     public User $user;
     public $isAdmin = false;
 
@@ -20,11 +19,7 @@ class ViewProfile extends Component
     public function mount()
     {
         $this->user = auth()->user();
-    }
-
-    public function close()
-    {
-        $this->open = false;
+        $this->isAdmin = $this->isAdmin();
     }
 
 

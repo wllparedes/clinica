@@ -11,7 +11,6 @@ class ViewNotifications extends Component
 
     public $notifications = [];
     public User $user;
-    public $open = false;
     public $unReadCount;
 
     public function loadNotifications()
@@ -19,11 +18,6 @@ class ViewNotifications extends Component
         $this->user = auth()->user();
 
         return  $this->user->notifications()->get();
-    }
-
-    public function close()
-    {
-        $this->open = false;
     }
 
     public function mount()
