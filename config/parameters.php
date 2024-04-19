@@ -27,6 +27,12 @@ return [
         ['label' => 'Rejected', 'value' => 'rejected'],
     ],
 
+    'languages' => [
+        'es' => 'Spanish',
+        'en' => 'English',
+        'quech' => 'Quechua',
+    ],
+
     'nationalities' => [
         'peru' => 'Peru',
         'argentina' => 'Argentina',

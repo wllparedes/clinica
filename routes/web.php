@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Appointment\AppointmentController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicalRequest\MedicalRequestController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
@@ -20,6 +21,8 @@ use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/set_language/{language}', [LanguageController::class, '__invoke'])->name('set_language');
 
 // LOGIN
 

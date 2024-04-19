@@ -16,6 +16,21 @@
             <div class="flex items-center">
                 <div class="flex items-center ms-3 gap-3">
 
+                    <x-dropdown>
+
+                        <x-slot name="trigger">
+                            <x-button icon="translate" label="{{ __(languageNow()) }}" default rounded />
+                        </x-slot>
+
+                        <x-dropdown.item href="{{ route('set_language', 'es') }}" wire:navigate
+                            label="{{ __('Spanish') }}" />
+                        <x-dropdown.item href="{{ route('set_language', 'en') }}" separator wire:navigate
+                            label="{{ __('English') }}" />
+                        <x-dropdown.item href="{{ route('set_language', 'quech') }}" separator wire:navigate
+                            label="{{ __('Quechua') }}" />
+
+                    </x-dropdown>
+
                     {{-- notifications --}}
 
                     <livewire:view-notifications />

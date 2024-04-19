@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -31,6 +33,11 @@ final class StaffTable extends PowerGridComponent
     public string $loadingComponent = 'components.loading';
 
     protected $listeners = ['staffCreated' => 'refresh', 'staffUpdated' => 'refresh'];
+
+    public function placeHolder()
+    {
+        return view('placeholders.table');
+    }
 
     public function refresh(): void
     {
