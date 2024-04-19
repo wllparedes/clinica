@@ -17,7 +17,7 @@ class ViewNotifications extends Component
     {
         $this->user = auth()->user();
 
-        return  $this->user->notifications()->get();
+        return  $this->user->notifications()->orderBy('id', 'desc')->get();
     }
 
     public function mount()

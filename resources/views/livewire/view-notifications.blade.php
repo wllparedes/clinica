@@ -14,23 +14,30 @@
         </button>
     </div>
 
-    <div class="absolute right-0 z-50 w-96 mt-2 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+    <div class="absolute right-0 z-500 w-96 mt-2 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
         id="dropdown-notifications" x-show="open" x-cloak>
-        <div class="px-2 py-2" role="none">
+
+        <div class="px-3 py-3">
+            <span class="text-sm font-semibold">{{ __('Notifications') }}</span>
+        </div>
+
+        <div class="px-3 h-80 py-1" style="max-height: 500px; overflow-y: auto;">
             @forelse ($notifications as $notification)
                 <div
-                    class="flex items-center justify-between mb-2 p-2 rounded border-dashed border-2 hover:bg-slate-50 {{ $notification->is_read ? 'border-teal-500' : 'border-red-400' }} hover:cursor-pointer">
+                    class=" flex items-center justify-between mb-2 p-2 rounded border-dashed border-2 hover:bg-slate-50 {{ $notification->is_read ? 'border-teal-500' : 'border-yellow-400' }} hover:cursor-pointer transition-all ease-in-out">
                     <div class="flex items-center">
                         <div class="mr-2">
                             @if ($notification->is_read)
                                 <x-icon name="check-circle" class="w-4 h-4 text-teal-500" solid />
                             @else
-                                <x-icon name="information-circle" class="w-4 h-4 text-red-500" solid />
+                                <x-icon name="information-circle" class="w-4 h-4 text-yellow-500" solid />
                             @endif
                         </div>
                         <div>
                             <span class="text-xs font-semibold">{{ __($notification->title) }}</span>
                             <p class=" text-gray-500 text-xs">{{ __($notification->description) }}</p>
+                            <span
+                                class="text-2xs text-gray-400">{{ getDateForHumans($notification->created_at) }}</span>
                         </div>
                     </div>
                     @if (!$notification->is_read)
@@ -46,6 +53,15 @@
                 <p class="text-sm p-4 text-center text-gray-500">{{ __('No notifications') }} </p>
             @endforelse
         </div>
+{{--
+        <div class="px-3 py-3 flex justify-center">
+            <a href="{{ route('admin.notifications') }}"
+                class="text-sm font-semibold text-center text-teal-500 hover:text-teal-600 p-2 hover:bg-teal-100 rounded-lg transition-all ease-in">
+                {{ __('View all notifications') }}
+            </a>
+        </div> --}}
+
+
     </div>
 
 </div>
